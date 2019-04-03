@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+{% if user.is_authenticated %}
+<div class="carousel-inner">
+  <div class="carousel-item active">
+    <img src="/static/img/home-bg.jpg" class="bd-placeholder-img" width="100%" height="100%">
+    <div class="container">
+      <div class="carousel-caption text-left">
+        <h1>Welcome {{ user.username }}</h1>
+        <p>We will help you create new resume step-by-step or If you already have a resume then we will re-format it and fill in your information</p>
+        <!--<p><a class="btn btn-outline-dark" href="{% url 'myapp:ProfileUpdateView' user.pk %}" role="button">Fill Form</a></p>-->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-8 mx-auto">
+    <div class="row">
+        <div class="col-4">
+            <br><h4>Upload File</h4><br>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-8 mx-auto">
+
+    <!-- DropZone file stats here -->
+    <form action="{% url 'myapp:Uploadfile' user.pk %}" method="post" class="dropzone" id="my_Dropzone"
+          enctype="multipart/form-data">
+        {% csrf_token %}
+
+     <div class="col-md-1">
+        <br><input type="submit" class="btn btn-outline-dark" value="Submit"/></div>
+    </form>
+
+    {% for error in form.errors %}
+    {{ error }}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+
+<!--<iframe src="https://docs.google.com/gview?url=https://www.adobe.com/support/ovation/ts/docs/ovation_test_show.ppt&embedded=true"-->
+        <!--style="width: 90%; height: 1000px">-->
+<!--</iframe>-->
+
+

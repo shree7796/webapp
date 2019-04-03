@@ -1,0 +1,195 @@
+{% load static %}
+<!--<!DOCTYPE html>-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Resume Parser</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/carousel/">
+
+    <!-- Bootstrap core CSS -->
+<!--<link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--<img src="{% static "my_app/example.jpg" %}" alt="My image">-->
+
+
+
+    <style>
+      .butt {
+        border: 1px outset black;
+        background-color: white;
+        height:150px;
+        width:200px;
+        cursor:pointer;
+    }
+
+      .butt:hover {
+        background-color: white;
+        color:black;
+    }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- footer icon class -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Custom styles for this template -->
+    <!--<link href="carousel.css" rel="stylesheet">-->
+    <link href="{% static 'css/carousel.css' %}" rel="stylesheet">
+
+    <!-- DropZone cdn links -->
+    <link rel="stylesheet" href="{% static 'css/dropzone.css' %}" />
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js"></script>-->
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css" />-->
+
+  </head>
+  <body>
+  <header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">Resume Parser</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        {% endif %}
+      </li>
+      </ul>
+      <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</header>
+
+
+
+
+  {% block content %}
+  {% endblock %}
+
+
+  <!-- Footer -->
+<footer class="page-footer font-small special-color-dark pt-4">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!-- Social buttons -->
+    <ul class="list-unstyled list-inline text-center">
+      <li class="list-inline-item">
+        <a class="btn-floating btn-fb mx-1" href="www.facebook.com">
+          <i class="fa fa-facebook"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-tw mx-1" href="www.twitter.com">
+          <i class="fa fa-twitter"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-gplus mx-1" href="www.googleplus.com">
+          <i class="fa fa-instagram"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-li mx-1" href="github.com">
+          <i class="fa fa-github"> </i>
+        </a>
+      </li>
+    </ul>
+        <!-- Social buttons -->
+
+  </div>
+    <!-- Footer Elements -->
+
+    <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <a href="https://resumeparser.com"> ResumeParser.com</a>
+  </div>
+    <!-- Copyright -->
+
+</footer>
+  <!-- Footer -->
+
+
+
+  <!-- FOOTER -->
+  <!--<footer class="container">-->
+    <!--<p class="float-right"><a href="#">Back to top</a></p>-->
+    <!--<p>&copy; 2017-2019 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>-->
+  <!--</footer>-->
+  <!-- Google Api -->
+<script>
+  function activatePlacesSearch(){
+    var input = document.getElementById('id_Address');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+  }
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn2UE3QWtjIXHYBbp-5CvddMxOybDrNxM&libraries=places&callback=activatePlacesSearch"></script>
+<!---->
+<script src="{% static 'js/jquery-3.3.1.slim.min.js' %}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="{% static 'js/jquery-slim.min.js' %}"><\/script>')</script><script src="{% static 'js/bootstrap.bundle.min.js' %}" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
+
+  <!-- DropZone js scripts -->
+<script type="text/javascript" src="{% static 'js/dropzone.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dropzone-amd-module.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/my_dropzone.js' %}"></script>
+  <!-- particle-js -->
+<!--<script type="text/javascript">-->
+ <!--particlesJS("particles-js",<strong>{% static 'json/particlesjs-config.json' %}</strong>);-->
+<!--</script>-->
+
+<script src="{% static 'js/dropzone.js' %}"></script>
+    <script type="text/javascript">
+        Dropzone.options.myDropzone ={
+            paramName: "docFile", // name of the input..
+            autoProcessQueue : true,
+            parallelUploads: 1,
+            maxFiles: 1,
+            maxfilesexceeded: function(file) {
+        this.removeAllFiles();
+        this.addFile(file);
+    },
+
+            init :  function (){
+                this.on( "success", function( file, responseText){
+                    // event launched at the end of uploading images queued
+                    console.log( responseText );
+                });
+            }
+        };
+    </script>
+
+</html>

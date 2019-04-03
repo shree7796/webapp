@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+<!--{% load bootstrap3 %}-->
+<!--{% bootstrap_css %}-->
+<!--{% bootstrap_javascript %}-->
+<!--{% bootstrap_messages %}-->
+
+
+{% block title %}Fill Form{% endblock %}
+
+{% block content %}
+<br><div  class="col-md-8 mx-auto">
+<br><h4>Experience and Projects</h4></div><br>
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-8 mx-auto">
+    <h6>
+        <div class="row">
+            <div class="col-2">
+                {{ form.user|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                {{ form.experience|as_crispy_field }}
+            </div>
+            <div class="col-5">
+                {{ form.Company|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                {{ form.type_of_industry|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                {{ form.dates_from|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ form.dates_to|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                {{ form.job_title|as_crispy_field }}
+            </div>
+            <div class="col-5">
+                {{ form.salary|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                {{ form.project_title|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                {{ form.project_description|as_crispy_field }}
+            </div>
+        </div>
+    </h6>
+
+    <input type="submit" value="Submit" class="btn btn-outline-dark"/>
+   </div>
+</form>
+{% for error in form.errors %}
+            {{ error }}
+        {% endfor %}
+{% endblock %}

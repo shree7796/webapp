@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+<!--{% load bootstrap3 %}-->
+<!--{% bootstrap_css %}-->
+<!--{% bootstrap_javascript %}-->
+<!--{% bootstrap_messages %}-->
+
+
+{% block title %}Fill Form{% endblock %}
+
+{% block content %}
+<br><div class="col-md-8 mx-auto">
+<br><h4>Additional Education</h4></div><br>
+<form method="post">
+    {% csrf_token %}
+    <div class="col-md-8 mx-auto">
+        <div class="row">
+            <div class="col-3">
+                {{ form.university|as_crispy_field }}
+            </div>
+            <div class="col-5">
+                {{ form.type_of_course|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                {{ form.duration|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                {{ form.course_completion_year|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                {{ form.subject|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                {{ form.aggregate_percentage|as_crispy_field }}
+            </div>
+        </div>
+        <br><input type="submit" class="btn btn-outline-dark"  value="Submit" name="next"/>
+    </div>
+</form>
+{% endblock %}

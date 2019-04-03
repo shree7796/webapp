@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Fill Form{% endblock %}
+
+{% block content %}
+<br><div class="col-md-8 mx-auto">
+<br><h4>Fill Educational Details!!</h4></div><br>
+<h6>
+<div>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="col-md-8 mx-auto">
+            <div class="row">
+            <div class="col-6">
+                {{ form.user|as_crispy_field }}
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-6">
+                {{ form.year_passing_10th|as_crispy_field }}
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-3">
+                {{ form.board_10th|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                {{ form.subject_in_10th|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                {{ form.cgpa_in_10th|as_crispy_field }}
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-6">
+                {{ form.year_passing_12th|as_crispy_field }}
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-3">
+                {{ form.board_12th|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                {{ form.subject_in_12th|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                {{ form.cgpa_in_12th|as_crispy_field }}
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-4">
+                {{ form.year_of_graduation|as_crispy_field }}
+            </div>
+            <div class="col-5">
+                {{ form.university|as_crispy_field }}
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-3">
+                {{ form.course|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                {{ form.subject|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                {{ form.cgpa|as_crispy_field }}
+            </div>
+            </div>
+            <br><input type="submit" class="btn btn-outline-dark"  value="Next" name="next"/>
+        </div>
+    </form>
+    {% for error in form.errors %}
+            {{ error }}
+        {% endfor %}
+    <div class="col-md-8 mx-auto">
+    <br><button class="btn btn-outline-dark"><a href="{% url 'myapp:AdditionalEducation' user.pk %}">Add more</a></button>
+    </div>
+</div>
+</h6>
+<div class="col-md-8 mx-auto">
+
+</div>
+{% endblock %}

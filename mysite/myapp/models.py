@@ -57,7 +57,7 @@ class PersonalDetailsModel(models.Model):
         This function save user's data to database by user name
         :return: user name
         """
-        return self.user
+        return '{} personal details'.format(self.user)
 
 
 class PersonalEducationDetails(models.Model):
@@ -85,7 +85,7 @@ class PersonalEducationDetails(models.Model):
 
         :return:
         """
-        return self.user
+        return '{} Personal Education'.format(self.user)
 
 
 class AdditionalEducation(models.Model):
@@ -107,7 +107,7 @@ class AdditionalEducation(models.Model):
 
         :return:
         """
-        return self.user
+        return '{} additional education'.format(self.user)
 
 
 class ExperienceAndProjects(models.Model):
@@ -132,7 +132,7 @@ class ExperienceAndProjects(models.Model):
 
         :return:
         """
-        return self.user
+        return '{} experience and projects'.format(self.user)
 
 
 class SkillsAndTechnology(models.Model):
@@ -152,7 +152,7 @@ class SkillsAndTechnology(models.Model):
 
         :return:
         """
-        return self.user
+        return '{} skills and technology'.format(self.user)
 
 
 file_path = []

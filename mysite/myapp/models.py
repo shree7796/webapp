@@ -54,7 +54,7 @@ class PersonalDetailsModel(models.Model):
 
     def __str__(self):
         """
-        This function save user's data to database by user name
+        This function save user's personal details to database by user name
         :return: user name
         """
         return '{} personal details'.format(self.user)

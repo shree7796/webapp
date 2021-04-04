@@ -206,7 +206,6 @@ class DocumentView(UpdateView):
         user_id = kwargs['pk']
         self.user = get_object_or_404(User, pk=user_id)
         self.object = self.get_object()
-        print('My class get method called')
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
@@ -229,7 +228,7 @@ class DocumentView(UpdateView):
         self.file_absolute_path.append(file_url)
         print("url --------->", file_path.docFile.url)
         obj = OpenPdfFileAndExtractFields()
-        obj.name()
+        # obj.name()
         obj.email()
         obj.mobile_no()
         obj.experience()
@@ -243,8 +242,7 @@ class DocumentView(UpdateView):
     def pdf_view(self):
         from django.http import FileResponse, Http404
         try:
-            print("Running pdf_view----")
-            return FileResponse(open(self.file_absolute_path[0], 'rb'), content_type='application/pdf')
+            return FileResponse(open(self.file_absolute_path[0], 'wb'), content_type='application/pdf')
         except FileNotFoundError:
             raise Http404
 

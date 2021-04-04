@@ -26,14 +26,15 @@ class OpenPdfFileAndExtractFields:
         file = path
         open_file = open(file, 'rb')
         pdf_reader = PyPDF2.PdfFileReader(open_file)
+        print("passed pdf read check 02221 ---------->>")
         results = ''
         self.lines = []
         for page in range(0, pdf_reader.getNumPages()):
             pages = pdf_reader.getPage(page)
             page_content = pages.extractText()
-            # print(page_content)
             result = str(page_content)
-            # print(result)
+            print("----+++++++++++------------>>>>>>>>>")
+            print(result)
             results += result
             self.lines.append(result)
         # print(self.lines)
@@ -201,7 +202,7 @@ class OpenPdfFileAndExtractFields:
 if __name__ == '__main__':
     print('Run........! ')
     obj = OpenPdfFileAndExtractFields()
-    obj.name()
+    # obj.name()
     obj.email()
     obj.mobile_no()
     obj.experience()

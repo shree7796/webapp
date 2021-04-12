@@ -16,7 +16,7 @@ This is a Resume Parser web application. You can update your information section
 You can also upload resume(different formats) and this system will parse the detils and create you a new resume. You can also edit the uploaded files details and choose the different template. 
 
 
-Language: 
+Languages: 
 - Python3, Django
 
 Library:

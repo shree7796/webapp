@@ -1,7 +1,15 @@
 from django.contrib import admin
-from .models import PersonalDetailsModel, SignUpModel, PersonalEducationDetails, AdditionalEducation,\
-    ExperienceAndProjects, SkillsAndTechnology, Document, DocumentDataInJsonFile
-# Register your models here.
+
+from .models import (
+    AdditionalEducation,
+    Document,
+    DocumentDataInJsonFile,
+    ExperienceAndProjects,
+    PersonalDetailsModel,
+    PersonalEducationDetails,
+    SignUpModel,
+    SkillsAndTechnology,
+)
 
 
 class MyModelAdmin(admin.ModelAdmin):
@@ -13,8 +21,6 @@ class MyModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SignUpModel)
-
-
 admin.site.register(PersonalDetailsModel)
 admin.site.register(PersonalEducationDetails)
 admin.site.register(AdditionalEducation)

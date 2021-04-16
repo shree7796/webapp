@@ -1,16 +1,10 @@
 from django.db import models
-# from django.urls import reverse
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import JSONField
-# from django.contrib.sessions.backends.db import SessionStore
-# from django.http import HttpRequest
-# from django_countries.fields import CountryField
-# from django_countries import fields
-# Create your models here.
 
 
 class Country(models.Model):
     name = models.TextField(max_length=50)
+    # Note: This part is broken. Will get fixed in phase-2
     # country = CountryField().formfield()
 
     def __str__(self):
@@ -174,17 +168,11 @@ class Document(models.Model):
     Upload_at = models.DateField(auto_now=True)
     objects = models.Manager()
 
-    # def __str__(self):
-    #     """
-    #
-    #     :return:
-    #     """
-    #     return self.docFile
-
 
 class DocumentDataInJsonFile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     documentData = models.TextField(default='')
+    # Note: This will get fix in Phase-2
     # data = JSONField(null=True)
     objects = models.Manager()
 

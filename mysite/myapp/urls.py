@@ -1,11 +1,19 @@
 # from django.contrib import admin
 from django.urls import path
-# from django.views.generic.base import TemplateView
-from myapp.views import ProfileUpdateView, SignUp, DocumentView, ResumeDetailsView
-from myapp.views import EducationUpdateView, EducationAddView, ExperienceAndProjectView, SkillsAndTechnologyView
-# from myapp.views import DocumentView
 
-# real_path = DocumentView.file_absolute_path
+from myapp.views import (
+    DocumentView,
+    ProfileUpdateView,
+    ResumeDetailsView,
+    SignUp,
+)
+from myapp.views import (
+    EducationAddView,
+    EducationUpdateView,
+    ExperienceAndProjectView,
+    SkillsAndTechnologyView,
+)
+
 app_name = 'myapp'
 
 urlpatterns = [

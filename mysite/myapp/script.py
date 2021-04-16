@@ -1,15 +1,12 @@
 import PyPDF2
 import re
 import nltk
+
 from .views import DocumentView
-from json import JSONEncoder
-from django.forms.models import model_to_dict
-from django.core import serializers
-from django.contrib.auth.models import User
 
 
 class OpenPdfFileAndExtractFields:
-
+    # function that will parse the resume and return the results in multiple sections
     Name = []
     Experience = []
     Education = []
@@ -19,25 +16,19 @@ class OpenPdfFileAndExtractFields:
     Phone = []
 
     def __init__(self):
-        # file = 'C:\\Users\\shivam\\Desktop\\csv\\resume17.pdf'
         path = DocumentView.file_absolute_path[0]
         DocumentView.file_absolute_path.clear()
-        print(path)
         file = path
         open_file = open(file, 'rb')
         pdf_reader = PyPDF2.PdfFileReader(open_file)
-        print("passed pdf read check 02221 ---------->>")
         results = ''
         self.lines = []
         for page in range(0, pdf_reader.getNumPages()):
             pages = pdf_reader.getPage(page)
             page_content = pages.extractText()
             result = str(page_content)
-            print("----+++++++++++------------>>>>>>>>>")
-            print(result)
             results += result
             self.lines.append(result)
-        # print(self.lines)
 
     def name(self):
         self.Name.clear()
@@ -50,7 +41,6 @@ class OpenPdfFileAndExtractFields:
             if hasattr(tagged_tree, 'label'):
                 entity_name = ' '.join(c[0] for c in tagged_tree.leaves())
                 named_entities.append(entity_name)
-                # print("Entity Name:-- ", entity_name)
                 entity_type = tagged_tree.label()  # get NE category
                 self.Name.append(named_entities)
         print("\nName: ", named_entities)
@@ -74,7 +64,6 @@ class OpenPdfFileAndExtractFields:
             if phone_number:
                 print('\nPhone number: ', phone_number)
                 self.Phone.append(phone_number)
-                # print("break chl ra h")
                 break
             lines_index_number += 1
 
@@ -109,7 +98,6 @@ class OpenPdfFileAndExtractFields:
             experience_result += word
             experience_result += " "
 
-        # print("\nExperience: ", experience_result.encode('utf-8'))
         self.Experience.append(experience_result)
 
     def skills(self):
@@ -138,7 +126,6 @@ class OpenPdfFileAndExtractFields:
             skills_result += " "
 
         self.Skills.append(skills_result)
-        # print("\nSkills: ", skills_result.encode('utf-8'))
 
     def education(self):
         self.Education.clear()
@@ -155,7 +142,6 @@ class OpenPdfFileAndExtractFields:
                         final_education_result += str(i)
                     break
             lines_index_number += 1
-        # print("\nEducation: ", final_education_result)
 
         list_of_words_where_loop_breaks = ['HOBBIES', 'EXPERIENCE', 'SKILL', 'SKILLS', 'Objective', 'Achievements']
         education_result = ''
@@ -166,7 +152,6 @@ class OpenPdfFileAndExtractFields:
             education_result += word
             education_result += " "
 
-        # print("\nEducation: ", education_result.encode('utf-8'))
         self.Education.append(education_result)
 
     def address(self):
@@ -174,7 +159,6 @@ class OpenPdfFileAndExtractFields:
         lines_index_number = 0
         for page in self.lines:
             search_address = re.findall(r"[\d+]+\s[\w+\s]+[,]\s[\w+]+\s[\d+]+", self.lines[0])
-            # print("\nAddress: ", search_address)
             if search_address:
                 print("\nAddress: ", search_address)
                 self.Address.append(search_address)
@@ -202,11 +186,10 @@ class OpenPdfFileAndExtractFields:
 if __name__ == '__main__':
     print('Run........! ')
     obj = OpenPdfFileAndExtractFields()
-    # obj.name()
+    # obj.name() # Note: This will get fix i Phase-2
     obj.email()
     obj.mobile_no()
     obj.experience()
     obj.skills()
     obj.education()
     obj.address()
-

@@ -1,13 +1,17 @@
 from django.contrib.auth.models import User
 from django import forms
+from django.forms import modelformset_factory
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
-from .models import PersonalDetailsModel, PersonalEducationDetails, AdditionalEducation, ExperienceAndProjects,\
-    SkillsAndTechnology, Document
-# from django_countries import countries
-# from django_countries import fields
-from django.forms import modelformset_factory
 
+from .models import (
+    AdditionalEducation,
+    Document,
+    ExperienceAndProjects,
+    PersonalDetailsModel,
+    PersonalEducationDetails,
+    SkillsAndTechnology,
+)
 
 # AdditionalFormSet = modelformset_factory(AdditionalEducation, extra=1)
 
@@ -31,7 +35,6 @@ class PersonalDetailsForm(ModelForm):
     """
     DOB = forms.DateField(
         widget=forms.TextInput(attrs={'type': 'date'}))
-    # current_country = fields.CountryField(countries.name()).formfield()
 
     class Meta:
         model = PersonalDetailsModel
@@ -92,5 +95,3 @@ class DocumentForm(ModelForm):
     class Meta:
         model = Document
         fields = ('docFile',)
-
-

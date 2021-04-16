@@ -1,19 +1,32 @@
-from django.shortcuts import render
-from django.views.generic.edit import CreateView, UpdateView
-from .forms import SignUpForm
-from django.urls import reverse_lazy, reverse
-from .forms import PersonalDetailsForm, EducationDetailForm, AdditionalEducationForm, ExperienceAndProjectForm,\
-    AdditionalFormSet, SkillsAndTechnologyForm, DocumentForm
-from .models import PersonalDetailsModel, PersonalEducationDetails, AdditionalEducation, ExperienceAndProjects,\
-    SkillsAndTechnology, Document, DocumentDataInJsonFile
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
-# from django.views.decorators.csrf import csrf_protect
-# from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.views.generic.edit import (
+    CreateView,
+    UpdateView,
+)
+from django.urls import reverse_lazy
 
-# Create your views here
+from .forms import (
+    AdditionalEducationForm,
+    DocumentForm,
+    EducationDetailForm,
+    ExperienceAndProjectForm,
+    PersonalDetailsForm,
+    SignUpForm,
+    SkillsAndTechnologyForm,
+
+)
+from .models import (
+    AdditionalEducation,
+    Document,
+    DocumentDataInJsonFile,
+    ExperienceAndProjects,
+    PersonalDetailsModel,
+    PersonalEducationDetails,
+    SignUpModel,
+    SkillsAndTechnology,
+)
 
 
 class SignUp(CreateView):
@@ -44,6 +57,7 @@ class ProfileUpdateView(UpdateView):
         print('My class get method called')
         return super().dispatch(request, *args, **kwargs)
 
+    # Note: Will get fix in Phase-2
     # def get(self, request, *args, **kwargs):
     #     user_id = kwargs['pk']
     #     self.user = get_object_or_404(User, pk=user_id)
@@ -90,7 +104,6 @@ class EducationUpdateView(UpdateView):
         user_id = kwargs['pk']
         self.user = get_object_or_404(User, pk=user_id)
         self.object = self.get_object()
-        print('Education class get method called')
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
@@ -100,10 +113,8 @@ class EducationUpdateView(UpdateView):
         :return:
         """
         try:
-            print('Try block called')
             return PersonalEducationDetails.objects.get(user=self.user)
         except PersonalEducationDetails.DoesNotExist:
-            print('Except block called')
             profile = PersonalEducationDetails(user=self.user)
             profile.save()
             return profile
@@ -126,7 +137,6 @@ class EducationAddView(CreateView):
         user_id = kwargs['pk']
         self.user = get_object_or_404(User, pk=user_id)
         # self.object = self.get_object()
-        print('My class get method called')
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
@@ -155,7 +165,6 @@ class ExperienceAndProjectView(CreateView):
         user_id = kwargs['pk']
         self.user = get_object_or_404(User, pk=user_id)
         # self.object = self.get_object()
-        print('My class get method called')
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
@@ -179,7 +188,6 @@ class SkillsAndTechnologyView(CreateView):
     def dispatch(self, request, *args, **kwargs):
         user_id = kwargs['pk']
         self.user = get_object_or_404(User, pk=user_id)
-        print('My class get method called')
         return super().dispatch(request, *args, **kwargs)
 
     def get_object(self, queryset=None):
@@ -200,7 +208,6 @@ class DocumentView(UpdateView):
     form_class = DocumentForm
     template_name = 'fileUpload.html'
     file_absolute_path = []
-    print("print", file_absolute_path)
 
     def dispatch(self, request, *args, **kwargs):
         user_id = kwargs['pk']
@@ -222,11 +229,12 @@ class DocumentView(UpdateView):
 
     def get_success_url(self):
         user_id = self.user.id
-        from .script import OpenPdfFileAndExtractFields  # import module(script.py) only when required
+
+        # imported here to avoid circular import
+        from .script import OpenPdfFileAndExtractFields
         file_path = Document.objects.get(user=self.user)
         file_url = file_path.docFile.path
         self.file_absolute_path.append(file_url)
-        print("url --------->", file_path.docFile.url)
         obj = OpenPdfFileAndExtractFields()
         # obj.name()
         obj.email()

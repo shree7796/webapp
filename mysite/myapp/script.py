@@ -73,6 +73,7 @@ class OpenPdfFileAndExtractFields:
 
         experience_patterns = ['EXPERIENCE', 'Experience']
         final_experience_result = ''
+        print("Lines in PDF: {}".format(self.lines))
         for page in self.lines:
             pat1 = []
             for pattern in experience_patterns:
@@ -99,6 +100,8 @@ class OpenPdfFileAndExtractFields:
             experience_result += " "
 
         self.Experience.append(experience_result)
+        print("000000000000000000000000")
+        print(self.Experience)
 
     def skills(self):
         self.Skills.clear()
